@@ -17,10 +17,21 @@
         <!-- Favorites -->
         <div class="favorites">
             <div  class="favorite" v-for="fvt in misFavoritos" >
-                <a :href="fvt.blog" target="_blank">
+                <a :href="fvt.blog" target="_blank" @click.prevent="mostrarFavorito(fvt)">
                     <img :src="fvt.avatar_url" alt="" class="result__avatar">
                 </a>
             </div>
+        </div>
+<!-- 
+        <div v-for="item in pruebas">
+            <ul>
+                <li>{{item.name}}</li>
+            </ul>
+        </div> -->
+
+        <div>
+            <ul id="tt">
+            </ul>
         </div>
 
         <!-- Content -->
