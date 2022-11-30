@@ -1,0 +1,16 @@
+{
+  "name": "buscar_usuarios",
+  "version": "1.0.1",
+  "description": "Proyecto para buscar usuario de github",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Matias Buet",
+  "license": "ISC",
+  "dependencies": {
+    "bootstrap": "^5.2.3",
+    "datatables.net": "^1.13.1",
+    "sweetalert2": "^11.6.15"
+  }
+}

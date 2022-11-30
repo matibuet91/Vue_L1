@@ -7,37 +7,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GitHub search</title>
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <script src="./node_modules/jquery/dist/jquery.min.js"></script>
+    <script src="./node_modules/sweetalert2/dist/sweetalert2.js" ></script>
+    <script src="./node_modules/datatables.net/js/jquery.dataTables.min.js" ></script>
+    <link rel="stylesheet" href="./node_modules/sweetalert2/dist/sweetalert2.css">
     <link rel="stylesheet" href="css/main.css">
     <script src="js/main.js"></script>
+    <script src="js/perfiles.js"></script>
+    <script src="js/favoritos.js"></script>
 </head>
 
 <body>
     <div id="appi">
         <!-- Favorites -->
         <div class="favorites">
-            <div  class="favorite" v-for="fvt in misFavoritos" >
-                <a :href="fvt.blog" target="_blank" @click.prevent="mostrarFavorito(fvt)">
-                    <img :src="fvt.avatar_url" alt="" class="result__avatar">
-                </a>
-            </div>
+            <favoritos
+            :mis-favoritos="misFavoritos"
+            @mostrar-favorito="mostrarFavorito"
+            ></favoritos>
         </div>
-<!-- 
-        <div v-for="item in pruebas">
-            <ul>
-                <li>{{item.name}}</li>
-            </ul>
-        </div> -->
-
-        <div>
-            <ul id="tt">
-            </ul>
-        </div>
-
         <!-- Content -->
         <article class="content">
-            <h1 class="content__title">Buscar usuarios Git</h1>
 
+            <h1>Buscar Usuarios</h1>
             <!-- Search -->
             <form class="search">
                 <input type="text" v-model="busqueda" class="search__input" required placeholder="Buscar usuarios">
@@ -45,16 +37,14 @@
             </form>
 
             <!-- Result -->
-            <div class="result" v-if="result">
-                <a v-if="esFavorito" href="#" class="result__toggle-favorite" @click="quitarFavorito">Quitar Favorito ⭐️</a>
-                <a v-else href="#" class="result__toggle-favorite" @click="addFavoritos">Añadir Favorito ⭐️</a>
-                <h2 class="result__name">{{result.name}}</h2>
-                <img :src="result.avatar_url" alt="" class="result__avatar">
-                <p class="result__bio">{{result.bio}}
-                    <br>
-                    <a :href="result.blog" target="_blank" class="result__blog">Blog</a>
-                </p>
-            </div>
+            <transition name="res" >
+                <perfiles v-if="result"  
+                    :resultado="result" 
+                    :favorito="esFavorito"
+                    @quitar-favorito="quitarFavorito" 
+                    @add-favorito="addFavoritos">
+                </perfiles>
+            </transition>
 
             <!-- Error -->
             <div class="result__error" v-show="error">
